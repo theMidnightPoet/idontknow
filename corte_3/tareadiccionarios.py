@@ -1,6 +1,6 @@
 libros = {}
 usuarios = {}
-menu = 0
+menu = 0    
 
 while menu != 7:
     print("------Bienvenido al Menu------")
