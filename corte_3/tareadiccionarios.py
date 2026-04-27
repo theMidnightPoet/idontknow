@@ -48,6 +48,21 @@ while menu != 7:
             usuarios[id_usuario] = {"nombre": nombre, "libros_prestados": []}
             
             print("usuario registrado")
-			
+    elif menu == "3":
+        id_usuario = input("ID usuario: ")
+        id_libro= input("ID Libro: ")
+    
+   
+    if id_usuario not in usuarios:
+        print("Usuario No Existe")
+    elif id_libro not in libros:
+        print("Libro no existe")
+    else: 
+        if libros[id_libro]["copias_disponibles"] > 0: 
+            usuarios[id_usuario]["libros_prestados"].append(id_libro)
+            libros[id_libro]["copias_disponibles"] -= 1 
+            print("Libro prestado")
+        else:
+            print("no hay copias disponibles")	
 
 
