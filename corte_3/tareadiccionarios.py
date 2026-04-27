@@ -22,7 +22,6 @@ while menu !=7:
             autor = input("Autor: ")
             categoria = input("Categoría: ")
             copias = int(input("Copias Disponibles: "))
-            # Corregido "categoria" aquí:
             libros[id_libro] = {"titulo": titulo, "autor": autor, "categoria": categoria, "copias_disponibles": copias}
             print("Libro Registrado")
             
