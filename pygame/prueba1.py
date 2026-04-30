@@ -9,5 +9,5 @@ screen = pygame.display.set_mode(size)
 #creacion bucle principal
 while True:
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == pygame.quit:
             sys.exit() 
