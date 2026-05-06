@@ -5,12 +5,10 @@ size = (475, 700)
 #definir colores
 #primero es rojo el segundo es verde y el tercero es azul
 BLACK = ( 0, 0, 0)
+GRAY = (128, 128, 128)
 WHITE = ( 255, 255, 255)
 SEA_GREEN = (60, 179, 113)
 TOMATO = (255, 99, 71)
-BLUE = (0, 0, 128)
-TEAL = (0, 128, 128)
-GRAY = (128, 128, 128)
 DODGER_BLUE = (30, 144, 255)
 GOLD = (255, 215, 0)
 INDIGO = (75, 0, 130)
