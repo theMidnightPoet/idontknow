@@ -1,16 +1,19 @@
 import pygame, sys
 pygame.init()
 
-size = (500, 700)
+size = (475, 700)
 #definir colores
 #primero es rojo el segundo es verde y el tercero es azul
 BLACK = ( 0, 0, 0)
 WHITE = ( 255, 255, 255)
-GREEN = ( 0, 255, 0)
-RED = ( 255, 0, 0)
+SEA_GREEN = (60, 179, 113)
+TOMATO = (255, 99, 71)
 BLUE = (0, 0, 128)
 TEAL = (0, 128, 128)
-VERDEPASTO = (0, )
+GRAY = (128, 128, 128)
+DODGER_BLUE = (30, 144, 255)
+GOLD = (255, 215, 0)
+INDIGO = (75, 0, 130)
 
 #CREAR VENTANA 
 screen = pygame.display.set_mode(size)
@@ -21,10 +24,13 @@ while True:
         if event.type == pygame.QUIT:
             sys.exit() 
 #color del fondo
-    screen.fill(VERDEPASTO)
+    screen.fill(INDIGO)
 #----Zona de dibujo 
-    pygame.draw.line(screen, BLUE, [0,100], [100,100], 10)
-    pygame.draw.rect(screen, TEAL, (165, 320, 170, 50))
+    pygame.draw.rect(screen, GOLD, (52, 15, 170, 330))
+    pygame.draw.rect(screen, DODGER_BLUE, (52, 360, 170, 330))
+    pygame.draw.rect(screen, SEA_GREEN, (250, 15, 170, 330))
+    pygame.draw.rect(screen, TOMATO, (250, 360, 170, 330))
+
 
 
 
