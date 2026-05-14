@@ -162,15 +162,97 @@ while True:
 
     if estado == "MENU":
 
+        pygame.draw.rect(screen, (95, 20, 160), (25, 40, 425, 760), border_radius=25)
+
+        
+        titulo = pygame.font.SysFont("verdana", 54, True)
+
         mostrar_texto(
-            "Selecciona Rondas:",
-            250,
-            font_big
+            "ClicQuest",
+            90,
+            titulo,
+            GOLD
+        )
+
+        
+        mostrar_texto(
+            "Juego de Reacción",
+            170,
+            font_big,
+            WHITE
         )
 
         mostrar_texto(
-            "1, 3, 5",
-            320
+            "Presiona una tecla para elegir rondas",
+            230,
+            font,
+            L_GOLD
+        )
+
+        
+        cuadros = [
+            {"x": 70, "y": 330, "w": 140, "h": 120, "txt": "1"},
+            {"x": 260, "y": 330, "w": 140, "h": 120, "txt": "3"},
+            {"x": 170, "y": 500, "w": 140, "h": 120, "txt": "5"},
+        ]
+
+        for c in cuadros:
+
+            
+            pygame.draw.rect(
+                screen,
+                WHITE,
+                (c["x"], c["y"], c["w"], c["h"]),
+                border_radius=20
+            )
+
+            
+            pygame.draw.rect(
+                screen,
+                GOLD,
+                (c["x"], c["y"], c["w"], c["h"]),
+                5,
+                border_radius=20
+            )
+
+            
+            numero = pygame.font.SysFont("verdana", 42, True)
+
+            texto_num = numero.render(
+                c["txt"],
+                True,
+                INDIGO
+            )
+
+            screen.blit(
+                texto_num,
+                (
+                    c["x"] + c["w"]//2 - texto_num.get_width()//2,
+                    c["y"] + 15
+                )
+            )
+
+            
+            texto_rondas = font.render(
+                "Rondas",
+                True,
+                BLACK
+            )
+
+            screen.blit(
+                texto_rondas,
+                (
+                    c["x"] + c["w"]//2 - texto_rondas.get_width()//2,
+                    c["y"] + 75
+                )
+            )
+
+        
+        mostrar_texto(
+            "Teclas: 1 - 3 - 5",
+            690,
+            font_big,
+            L_SEA_GREEN
         )
 
     elif estado == "ESPERANDO":
