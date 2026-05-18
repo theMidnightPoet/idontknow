@@ -25,7 +25,7 @@ L_TOMATO = (255, 180, 160)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GREEN = (0, 255, 0)
-
+ROJO_FALLO = (139, 0, 0)
 rects = [
     {"id": 0, "color": GOLD, "bright": L_GOLD,
      "rect": pygame.Rect(52, 50, 180, 350)},
@@ -37,12 +37,11 @@ rects = [
      "rect": pygame.Rect(250, 50, 180, 350)},
 
     {"id": 3, "color": TOMATO, "bright": L_TOMATO,
-     "rect": pygame.Rect(250, 420, 180, 350)}
-]
+     "rect": pygame.Rect(250, 420, 180, 350)}]
 
 font = pygame.font.SysFont("verdana", 24)
 font_big = pygame.font.SysFont("verdana", 30, True)
-
+font_derrota = pygame.font.SysFont("verdana", 60, True)
 clock = pygame.time.Clock()
 
 rondas_totales = 0
@@ -83,8 +82,11 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
             mouse_pos = event.pos
-
-            if estado == "ILUMINADO":
+            if estado == "ESPERANDO":
+                for r in rects:
+                    if r["rect"].collidepoint(mouse_pos):
+                        estado = "DERROTA"
+            elif estado == "ILUMINADO":
 
                 if target_rect["rect"].collidepoint(mouse_pos):
 
@@ -119,8 +121,9 @@ while True:
                             current_time
                             + random.randint(1000, 3000)
                         )
-
-            elif estado == "FINALIZADO":
+                else:
+                    estado = "DERROTA"
+            elif estado == "FINALIZADO" or estado == "DERROTA":
 
                 if boton_reinicio.collidepoint(mouse_pos):
 
@@ -253,6 +256,13 @@ while True:
                 color,
                 r["rect"]
             )
+    elif estado == "DERROTA":
+        for r in rects:
+            pygame.draw.rect(screen, ROJO_FALLO, r["rect"])
+        mostrar_texto("¡DERROTA!", 250, font_derrota, WHITE)
+        mostrar_texto("Haz clic en el cuadro correcto", 340, font, L_TOMATO)
+        pygame.draw.rect(screen, GREEN, boton_reinicio)
+        mostrar_texto("Volver a intentar", 600, font_big, WHITE)
 
     elif estado == "FINALIZADO":
 
