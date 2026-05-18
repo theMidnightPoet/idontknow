@@ -25,6 +25,7 @@ L_TOMATO = (255, 180, 160)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GREEN = (0, 255, 0)
+ROJO_FALLO = (139, 0, 0) # Color #8B0000
 
 rects = [
     {"id": 0, "color": GOLD, "bright": L_GOLD,
@@ -42,6 +43,7 @@ rects = [
 
 font = pygame.font.SysFont("verdana", 24)
 font_big = pygame.font.SysFont("verdana", 30, True)
+font_derrota = pygame.font.SysFont("verdana", 60, True) # Fuente grande para la derrota
 
 clock = pygame.time.Clock()
 
@@ -84,7 +86,13 @@ while True:
 
             mouse_pos = event.pos
 
-            if estado == "ILUMINADO":
+            # Si hace clic mientras espera que se ilumine un cuadro, pierde automáticamente
+            if estado == "ESPERANDO":
+                for r in rects:
+                    if r["rect"].collidepoint(mouse_pos):
+                        estado = "DERROTA"
+
+            elif estado == "ILUMINADO":
 
                 if target_rect["rect"].collidepoint(mouse_pos):
 
@@ -119,8 +127,11 @@ while True:
                             current_time
                             + random.randint(1000, 3000)
                         )
+                else:
+                    # Hizo clic en un cuadro equivocado
+                    estado = "DERROTA"
 
-            elif estado == "FINALIZADO":
+            elif estado == "FINALIZADO" or estado == "DERROTA":
 
                 if boton_reinicio.collidepoint(mouse_pos):
 
@@ -253,6 +264,19 @@ while True:
                 color,
                 r["rect"]
             )
+
+    elif estado == "DERROTA":
+        # Dibuja todos los recuadros en color rojo oscuro (#8B0000)
+        for r in rects:
+            pygame.draw.rect(screen, ROJO_FALLO, r["rect"])
+            
+        # Mensaje de derrota grande
+        mostrar_texto("¡DERROTA!", 250, font_derrota, WHITE)
+        mostrar_texto("Haz clic en el cuadro correcto", 340, font, L_TOMATO)
+
+        # Botón de reinicio rudimentario para poder salir del estado
+        pygame.draw.rect(screen, GREEN, boton_reinicio)
+        mostrar_texto("Volver a intentar", 600, font_big, WHITE)
 
     elif estado == "FINALIZADO":
 
